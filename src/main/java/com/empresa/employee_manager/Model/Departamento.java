@@ -1,19 +1,46 @@
+package com.empresa.employee_manager.Model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
+@Table(name = "Departamento")
 public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     private String nombre;
-    
-    @Enumerated(EnumType.STRING)
+
+    @Enumerated(EnumType.ORDINAL)
     private Estado estado;
 
-    // Getters y Setters
-    // ...
-}
+    public enum Estado {
+        INACTIVO,  // 0
+        ACTIVO     // 1
+    }
 
-public enum Estado {
-    ACTIVO, INACTIVO
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }
