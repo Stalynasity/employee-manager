@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 @Service
 public class EmployeeService {
 
@@ -28,7 +29,7 @@ public class EmployeeService {
         Optional<Departamento> optionalDept = departmentRepository.findById(departmentId);
         if (optionalDept.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new BaseResponse<>(false, null, "Departamento no encontrado"));
+                    .body(new BaseResponse<>(false, null, "Departamento no encontrado"));
         }
 
         Departamento department = optionalDept.get();
@@ -47,14 +48,13 @@ public class EmployeeService {
         EmpleadoModel saved = employeeRepository.save(employee);
 
         EmpleadoResponseDTO responseDTO = new EmpleadoResponseDTO(
-            saved.getId(),
-            saved.getNombres(),
-            saved.getApellidos(),
-            saved.getRol(),
-            saved.getSalario(),
-            saved.getEstado().name(),
-            saved.getDepartamento().getNombre()
-        );
+                saved.getId(),
+                saved.getNombres(),
+                saved.getApellidos(),
+                saved.getRol(),
+                saved.getSalario(),
+                saved.getEstado().name(),
+                saved.getDepartamento().getNombre());
 
         return ResponseEntity.ok(new BaseResponse<>(true, responseDTO, "Empleado creado correctamente"));
     }
@@ -63,31 +63,29 @@ public class EmployeeService {
 
         try {
             Optional<EmpleadoModel> optionalEmp = employeeRepository.findById(employeeId);
-        if (optionalEmp.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new BaseResponse<>(false, null, "Empleado no encontrado"));
-        }
+            if (optionalEmp.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new BaseResponse<>(false, null, "Empleado no encontrado"));
+            }
 
-        EmpleadoModel employee = optionalEmp.get();
-        employee.setEstado(Estado.INACTIVO);
-        employeeRepository.save(employee);
+            EmpleadoModel employee = optionalEmp.get();
+            employee.setEstado(Estado.INACTIVO);
+            employeeRepository.save(employee);
 
-        return ResponseEntity.ok(new BaseResponse<>(true, null, "Empleado eliminado correctamente"));
-        } 
-        catch (Exception e) 
-        {
+            return ResponseEntity.ok(new BaseResponse<>(true, null, "Empleado eliminado correctamente"));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new BaseResponse<>(false, null, "Error al eliminar el empleado"));
+                    .body(new BaseResponse<>(false, null, "Error al eliminar el empleado"));
         }
-        
+
     }
 
     public ResponseEntity<BaseResponse<empleadoSalarioMasAltoResponseDTO>> obtenerEmpleadoConSalarioMasAlto() {
         List<EmpleadoModel> empleados = employeeRepository.findAll();
 
         Optional<EmpleadoModel> empleadoOptional = empleados.stream()
-            .filter(emp -> emp.getEstado() == Estado.ACTIVO)
-            .max(Comparator.comparing(EmpleadoModel::getSalario));
+                .filter(emp -> emp.getEstado() == Estado.ACTIVO)
+                .max(Comparator.comparing(EmpleadoModel::getSalario));
 
         if (empleadoOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -96,35 +94,33 @@ public class EmployeeService {
 
         EmpleadoModel empleado = empleadoOptional.get();
         empleadoSalarioMasAltoResponseDTO dto = new empleadoSalarioMasAltoResponseDTO(
-            empleado.getNombres(),
-            empleado.getApellidos(),
-            empleado.getSalario()
-        );
+                empleado.getNombres(),
+                empleado.getApellidos(),
+                empleado.getSalario());
 
         return ResponseEntity.ok(new BaseResponse<>(true, dto, "Empleado con mayor salario encontrado"));
     }
 
     public ResponseEntity<BaseResponse<EmpleadoMasJovenResponseDTO>> obtenerEmpleadoMasJoven() {
-    List<EmpleadoModel> empleados = employeeRepository.findAll();
+        List<EmpleadoModel> empleados = employeeRepository.findAll();
 
-    Optional<EmpleadoModel> empleadoOptional = empleados.stream()
-        .filter(emp -> emp.getEstado() == Estado.ACTIVO)
-        .min(Comparator.comparing(EmpleadoModel::getEdad));
+        Optional<EmpleadoModel> empleadoOptional = empleados.stream()
+                .filter(emp -> emp.getEstado() == Estado.ACTIVO)
+                .min(Comparator.comparing(EmpleadoModel::getEdad));
 
-    if (empleadoOptional.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new BaseResponse<>(false, null, "No se encontró ningún empleado activo"));
+        if (empleadoOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new BaseResponse<>(false, null, "No se encontró ningún empleado activo"));
+        }
+
+        EmpleadoModel employee = empleadoOptional.get();
+        EmpleadoMasJovenResponseDTO dto = new EmpleadoMasJovenResponseDTO(
+                employee.getNombres(),
+                employee.getApellidos(),
+                employee.getEdad());
+
+        return ResponseEntity.ok(new BaseResponse<>(true, dto, "Empleado más joven encontrado"));
     }
-
-    EmpleadoModel employee = empleadoOptional.get();
-    EmpleadoMasJovenResponseDTO dto = new EmpleadoMasJovenResponseDTO(
-        employee.getNombres(),
-        employee.getApellidos(),
-        employee.getEdad()
-    );
-
-    return ResponseEntity.ok(new BaseResponse<>(true, dto, "Empleado más joven encontrado"));
-}
 
     public ResponseEntity<BaseResponse<Long>> totalEmpleadosUltimoMes() {
         LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
