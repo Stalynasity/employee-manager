@@ -1,4 +1,4 @@
-package com.empresa.employee_manager.Model;
+package com.empresa.employee_manager.Model.DTOS.Departamento;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +17,14 @@ public class Departamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     private String nombre;
 
@@ -43,4 +51,5 @@ public class Departamento {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
 }

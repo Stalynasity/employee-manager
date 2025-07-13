@@ -18,24 +18,32 @@ CREATE TABLE IF NOT EXISTS empleado (
     edad INT,
     rol VARCHAR(255),
     salario DECIMAL(10, 2),
-    fechaIngreso DATE,
+    fecha_ingreso DATE,
     estado INT,
     departamento_id BIGINT,
     FOREIGN KEY (departamento_id) REFERENCES departamento(id)
 );
 
 
-INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fechaIngreso, estado, departamento_id)
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
 VALUES ('Juan', 'Perez', 30, 'Desarrollador', 3000.00, '2021-01-15', 1, 1);
 
-INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fechaIngreso, estado, departamento_id)
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
 VALUES ('Maria', 'Lopez', 25, 'Analista', 2500.00, '2022-02-01', 1, 2);
 
-INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fechaIngreso, estado, departamento_id)
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
 VALUES ('Luis', 'Gomez', 28, 'Tester', 2200.00, '2022-06-10', 1, 2);
 
-INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fechaIngreso, estado, departamento_id)
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
 VALUES ('Ana', 'Ruiz', 35, 'Contador', 2700.00, '2020-09-01', 1, 3);
 
-INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fechaIngreso, estado, departamento_id)
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
 VALUES ('Carlos', 'Santos', 40, 'Vendedor', 2900.00, '2019-03-20', 1, 4);
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
+VALUES ('Andrea', 'Castillo', 26, 'Diseñadora UX', 2400.00, '2025-06-14', 1, 2);
+
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
+VALUES ('Diego', 'Martinez', 31, 'Soporte Técnico', 2100.00, '2025-06-15', 1, 5);
+
+INSERT INTO empleado (nombres, apellidos, edad, rol, salario, fecha_ingreso, estado, departamento_id)
+VALUES ('Valeria', 'Jimenez', 29, 'Marketing Digital', 2600.00, '2025-06-28', 1, 4);

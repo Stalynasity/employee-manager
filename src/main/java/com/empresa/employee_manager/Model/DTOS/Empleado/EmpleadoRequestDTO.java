@@ -1,25 +1,18 @@
-package com.empresa.employee_manager.Model;
+package com.empresa.employee_manager.Model.DTOS.Empleado;
 
-import java.time.LocalDate;
-
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "Empleado")
-public class Empleado {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long id;
-
+public class EmpleadoRequestDTO {
     private String nombres;
     private String apellidos;
     private Integer edad;
     private String rol;
     private Double salario;
-    private LocalDate fechaIngreso;
-    private LocalDate fechaSalida;
+    private String fechaIngreso;
+    private String fechaSalida;
+    private int estado; // 0 o 1
+
+    public EmpleadoRequestDTO(String string, String string2, int i, String string3, double d, String string4,
+            Object object, int ordinal, long l) {
+    }
 
     public String getNombres() {
         return nombres;
@@ -61,47 +54,27 @@ public class Empleado {
         this.salario = salario;
     }
 
-    public LocalDate getFechaIngreso() {
+    public String getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {
+    public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public LocalDate getFechaSalida() {
+    public String getFechaSalida() {
         return fechaSalida;
     }
 
-    public void setFechaSalida(LocalDate fechaSalida) {
+    public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 
-    @Enumerated(EnumType.ORDINAL)
-    private Estado estado;
-
-    public Estado getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "departamento_id")
-    private Departamento departamento;
-
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-
-    public enum Estado {
-        INACTIVO,  // 0
-        ACTIVO     // 1
     }
 }

@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.empresa.employee_manager.Model.Empleado;
+import com.empresa.employee_manager.Model.DTOS.Empleado.EmpleadoModel;
 
-public interface EmployeeRepository extends JpaRepository<Empleado, Long> {
+public interface EmployeeRepository extends JpaRepository<EmpleadoModel, Long> {
 
-    Empleado findTopByOrderBySalarioDesc();
-    Empleado findTopByOrderByEdadAsc();
+    EmpleadoModel findTopByOrderBySalarioDesc();
+    EmpleadoModel findTopByOrderByEdadAsc();
     Long countByFechaIngresoAfter(LocalDate date);
 }
