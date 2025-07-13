@@ -14,7 +14,6 @@ import com.empresa.employee_manager.Service.DepartmentService;
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
-
     @Autowired
     private DepartmentService departmentService;
 
