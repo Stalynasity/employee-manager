@@ -4,6 +4,10 @@ public class DepartamentoRequestDTO {
 
     private String nombre;
 
+    public DepartamentoRequestDTO(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }

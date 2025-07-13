@@ -10,8 +10,16 @@ public class EmpleadoRequestDTO {
     private String fechaSalida;
     private int estado; // 0 o 1
 
-    public EmpleadoRequestDTO(String string, String string2, int i, String string3, double d, String string4,
-            Object object, int ordinal, long l) {
+    public EmpleadoRequestDTO(String nombres, String apellidos, Integer edad, String rol, Double salario,
+            String fechaIngreso, String fechaSalida, int estado) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.rol = rol;
+        this.salario = salario;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.estado = estado;
     }
 
     public String getNombres() {

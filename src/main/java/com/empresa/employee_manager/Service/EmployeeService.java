@@ -60,7 +60,9 @@ public class EmployeeService {
     }
 
     public ResponseEntity<BaseResponse<Void>> deleteEmployee(Long employeeId) {
-        Optional<EmpleadoModel> optionalEmp = employeeRepository.findById(employeeId);
+
+        try {
+            Optional<EmpleadoModel> optionalEmp = employeeRepository.findById(employeeId);
         if (optionalEmp.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new BaseResponse<>(false, null, "Empleado no encontrado"));
@@ -71,6 +73,13 @@ public class EmployeeService {
         employeeRepository.save(employee);
 
         return ResponseEntity.ok(new BaseResponse<>(true, null, "Empleado eliminado correctamente"));
+        } 
+        catch (Exception e) 
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new BaseResponse<>(false, null, "Error al eliminar el empleado"));
+        }
+        
     }
 
     public ResponseEntity<BaseResponse<empleadoSalarioMasAltoResponseDTO>> obtenerEmpleadoConSalarioMasAlto() {

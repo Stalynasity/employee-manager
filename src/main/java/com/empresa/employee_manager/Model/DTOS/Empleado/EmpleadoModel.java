@@ -54,6 +54,11 @@ public class EmpleadoModel {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
     public String getNombres() {
         return nombres;
     }
@@ -126,8 +131,4 @@ public class EmpleadoModel {
         this.departamento = departamento;
     }
 
-    public void setId(long l) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
-    }
 }

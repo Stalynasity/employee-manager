@@ -1,6 +1,5 @@
 package com.empresa.employee_manager.Model;
 
-import java.util.function.BooleanSupplier;
 
 public class BaseResponse<T> {
 
@@ -43,8 +42,5 @@ public class BaseResponse<T> {
         this.message = message;
     }
 
-    public BooleanSupplier getIsSuccess() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getIsSuccess'");
-    }
+    
 }

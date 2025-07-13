@@ -7,8 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.empresa.employee_manager.Model.DTOS.Empleado.EmpleadoModel;
 
 public interface EmployeeRepository extends JpaRepository<EmpleadoModel, Long> {
-
-    EmpleadoModel findTopByOrderBySalarioDesc();
-    EmpleadoModel findTopByOrderByEdadAsc();
     Long countByFechaIngresoAfter(LocalDate date);
 }
