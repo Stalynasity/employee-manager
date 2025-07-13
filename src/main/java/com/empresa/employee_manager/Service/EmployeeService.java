@@ -42,7 +42,7 @@ public class EmployeeService {
         employee.setSalario(dto.getSalario());
         employee.setFechaIngreso(LocalDate.parse(dto.getFechaIngreso()));
         employee.setFechaSalida(dto.getFechaSalida() != null ? LocalDate.parse(dto.getFechaSalida()) : null);
-        employee.setEstado(Estado.values()[dto.getEstado()]);
+        employee.setEstado(Estado.values()[dto.getEstado()]); //controlar estado en front
         employee.setDepartamento(department);
 
         EmpleadoModel saved = employeeRepository.save(employee);

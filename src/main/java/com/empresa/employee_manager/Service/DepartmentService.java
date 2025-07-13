@@ -1,5 +1,7 @@
 package com.empresa.employee_manager.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,4 +58,16 @@ public class DepartmentService {
             );
         }
     }
+    public ResponseEntity<BaseResponse<List<Departamento>>> listDepartments() {
+    try {
+        List<Departamento> departments = departmentRepository.findAllByOrderByNombreAsc();
+        return ResponseEntity.ok(
+            new BaseResponse<>(true, departments, "Lista de departamentos obtenida correctamente")
+        );
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+            new BaseResponse<>(false, null, "Error al obtener la lista de departamentos")
+        );
+    }
+}
 }
