@@ -1,5 +1,7 @@
 package com.empresa.employee_manager.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,5 +52,10 @@ public class EmployeeController {
     @GetMapping("/countLastMonth")
     public ResponseEntity<BaseResponse<Long>> TotalEmpleadosElMesPasado() {
         return employeeService.totalEmpleadosUltimoMes();
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<BaseResponse<List<EmpleadoModel>>> listEmployees() {
+        return employeeService.listEmployees();
     }
 }

@@ -1,6 +1,7 @@
 package com.empresa.employee_manager.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.empresa.employee_manager.Model.BaseResponse;
 import com.empresa.employee_manager.Model.DTOS.Departamento.*;
+import com.empresa.employee_manager.Model.DTOS.Departamento.Departamento.Estado;
 import com.empresa.employee_manager.Repository.DepartamentoRepository;
 
 @Service
@@ -42,22 +44,25 @@ public class DepartmentService {
     }
 
     public ResponseEntity<BaseResponse<Void>> deleteDepartment(Long id) {
-        try {
-            if (!departmentRepository.existsById(id)) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new BaseResponse<>(false, null, "Departamento no encontrado")
+    try {
+                Optional<Departamento> optionalDepartamento = departmentRepository.findById(id);
+                if (optionalDepartamento.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new BaseResponse<>(false, null, "Departamento no encontrado")
+                    );
+                }
+
+                Departamento departamento = optionalDepartamento.get();
+                departamento.setEstado(Estado.INACTIVO); // Asumiendo que tu campo estado es String
+                departmentRepository.save(departamento);
+
+                return ResponseEntity.ok(new BaseResponse<>(true, null, "Departamento eliminado (lógicamente)"));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new BaseResponse<>(false, null, "Error al eliminar el departamento")
                 );
             }
-
-            departmentRepository.deleteById(id);
-            return ResponseEntity.ok(new BaseResponse<>(true, null, "Departamento eliminado"));
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                new BaseResponse<>(false, null, "Error al eliminar el departamento")
-            );
         }
-    }
     public ResponseEntity<BaseResponse<List<Departamento>>> listDepartments() {
     try {
         List<Departamento> departments = departmentRepository.findAllByOrderByNombreAsc();

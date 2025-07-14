@@ -70,6 +70,7 @@ public class EmployeeService {
 
             EmpleadoModel employee = optionalEmp.get();
             employee.setEstado(Estado.INACTIVO);
+            employee.setFechaSalida(LocalDate.now());
             employeeRepository.save(employee);
 
             return ResponseEntity.ok(new BaseResponse<>(true, null, "Empleado eliminado correctamente"));
@@ -127,5 +128,15 @@ public class EmployeeService {
         Long count = employeeRepository.countByFechaIngresoAfter(oneMonthAgo);
 
         return ResponseEntity.ok(new BaseResponse<>(true, count, "Cantidad de empleados ingresados el último mes"));
+    }
+
+    public ResponseEntity<BaseResponse<List<EmpleadoModel>>> listEmployees() {
+        try {
+            List<EmpleadoModel> employees = employeeRepository.findAllByOrderByFechaIngresoAsc();
+            return ResponseEntity.ok(new BaseResponse<>(true, employees, "Lista de empleados obtenida correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(false, null, "Error al obtener la lista de empleados"));
+        }
     }
 }
