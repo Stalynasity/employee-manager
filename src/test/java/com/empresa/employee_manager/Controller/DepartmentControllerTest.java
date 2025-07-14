@@ -35,7 +35,7 @@ class DepartmentControllerTest {
     @Test
     void testCreateDepartment() throws Exception {
         DepartamentoRequestDTO request = new DepartamentoRequestDTO("TI");
-        DepartamentoResponseDTO response = new DepartamentoResponseDTO(1L, "TI", "ACTIVO");
+        DepartamentoResponseDTO response = new DepartamentoResponseDTO(1L, "TI", "A");
 
         Mockito.when(departmentService.createDepartment(any(DepartamentoRequestDTO.class)))
             .thenReturn(ResponseEntity.ok(new BaseResponse<>(true, response, "Departamento creado correctamente")));

@@ -35,7 +35,7 @@ public class EmployeeControllerTest {
     @Test
     void testCreateEmployee() throws Exception {
         EmpleadoRequestDTO request = new EmpleadoRequestDTO("Juan", "Perez", 30, "Dev", 2000.0, "2023-05-01", null, 0);
-        EmpleadoResponseDTO responseDTO = new EmpleadoResponseDTO(1L, "Juan", "Perez", "Dev", 2000.0, "ACTIVO", "TI");
+        EmpleadoResponseDTO responseDTO = new EmpleadoResponseDTO(1L, "Juan", "Perez", "Dev", 2000.0, "A", "TI");
         BaseResponse<EmpleadoResponseDTO> baseResponse = new BaseResponse<>(true, responseDTO, "Empleado creado correctamente");
 
         Mockito.when(employeeService.createEmployee(eq(1L), any())).thenReturn(ResponseEntity.ok(baseResponse));
