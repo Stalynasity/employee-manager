@@ -23,7 +23,7 @@ public class DepartmentService {
         try {
             Departamento departamento = new Departamento();
             departamento.setNombre(dto.getNombre());
-            departamento.setEstado(Departamento.Estado.ACTIVO);
+            departamento.setEstado(Departamento.Estado.A);
 
             Departamento saved = departmentRepository.save(departamento);
 
@@ -53,7 +53,7 @@ public class DepartmentService {
                 }
 
                 Departamento departamento = optionalDepartamento.get();
-                departamento.setEstado(Estado.INACTIVO); // Asumiendo que tu campo estado es String
+                departamento.setEstado(Estado.I);
                 departmentRepository.save(departamento);
 
                 return ResponseEntity.ok(new BaseResponse<>(true, null, "Departamento eliminado (lógicamente)"));

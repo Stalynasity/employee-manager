@@ -69,7 +69,7 @@ public class EmployeeService {
             }
 
             EmpleadoModel employee = optionalEmp.get();
-            employee.setEstado(Estado.INACTIVO);
+            employee.setEstado(Estado.I);
             employee.setFechaSalida(LocalDate.now());
             employeeRepository.save(employee);
 
@@ -85,7 +85,7 @@ public class EmployeeService {
         List<EmpleadoModel> empleados = employeeRepository.findAll();
 
         Optional<EmpleadoModel> empleadoOptional = empleados.stream()
-                .filter(emp -> emp.getEstado() == Estado.ACTIVO)
+                .filter(emp -> emp.getEstado() == Estado.A)
                 .max(Comparator.comparing(EmpleadoModel::getSalario));
 
         if (empleadoOptional.isEmpty()) {
@@ -106,7 +106,7 @@ public class EmployeeService {
         List<EmpleadoModel> empleados = employeeRepository.findAll();
 
         Optional<EmpleadoModel> empleadoOptional = empleados.stream()
-                .filter(emp -> emp.getEstado() == Estado.ACTIVO)
+                .filter(emp -> emp.getEstado() == Estado.A)
                 .min(Comparator.comparing(EmpleadoModel::getEdad));
 
         if (empleadoOptional.isEmpty()) {

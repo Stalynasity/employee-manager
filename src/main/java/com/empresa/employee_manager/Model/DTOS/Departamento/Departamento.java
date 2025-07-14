@@ -32,8 +32,8 @@ public class Departamento {
     private Estado estado;
 
     public enum Estado {
-        INACTIVO,  // 0
-        ACTIVO     // 1
+        I,  // 0
+        A     // 1
     }
 
     public String getNombre() {
